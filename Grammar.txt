@@ -1,39 +1,45 @@
-# Person = 	'person'(' ')*'{'Fields'}' 
 
-
-# Fields = 	'name'(' ')*'{'STRING'}'(' ')*' ',' '(' ')*' Fields | 
-			'diet'(' ')*'{'DIET'}'(' ')*' ',' '(' ')*' Nodiet | 
-			'cuisine'(' ')*'{'CUISINE'}'(' ')*' ',' '(' ')*' Fields | 
-			'type'(' ')*'{'TYPE'}'(' ')*' ',' '(' ')*' Fields |
-			'time_'('available' | 'unavailable') (' ')'*'{' Available '}' (' ')* ',' (' ')* Fields
-
-# Available = 	'{' (Date',')* Date'}'
-
-# Date = 		'{' (' ')* MONTH DAY (' ')* ',' (' ')* TIME1 (' ')* '-' (' ')* TIME2 (' ')* '}' (' ')* 
-
-
+/*
+#GRAMMAR:
+#Program ::= Potluck EOF
+#Potluck ::= 'event' '{' Event '}' | 'person' '{' Person '}' | 'ingredients' '{' Ingredients '}'
+#Event ::= ('name'|'details'|'place') '{' STRING '}' Event | 'time' '{' Date '}' Event | NULL
+#Person ::= 'name' '{'STRING'}' Person | 
+			'diet' '{'DIET'}' Person | 
+			'cuisine' '{'CUISINE'}' Person | 
+			'type' '{'TYPE'}' Person |
+			('available' | 'unavailable') '{' Available '}' Person |
+			NULL
+#Ingredients ::= (STRING ',')* String
+#Available ::= (Date',')* Date
+#Date ::= '{' MONTH DAY ',' TIME '-' TIME '}'
 */
 
 event{
-	name{Bob's potluck},
-	details{Evan will be there},
-	place{MCMASTER UNIVERSITY},
-	time_unavailable{
-		{MARCH  16, 18-20},
-		{MARCH  16, 18-20}
-	}
-		
-person{
-	name{Margart},
-	diet{Vegetarian,},
-	cuisine{Italian},
-	type{Lunch},
-	
-	time_unavailable{
-		{{MARCH  16, 18-20}, {MARCH  16, 18-20}}
-	}
+	name{Bob's potluck}
+	details{Evan will be there}
+	place{MCMASTER UNIVERSITi}
+	time{
+		{MARCH 16, 18:00-20:00}
 }
+
+person{
+	name{Margart}
+	diet{Vegetarian}
+	cuisine{Italian}
+	type{Lunch}
 	
+	avalable{
+		{MARCH 16, 18:00-20:00}
+		{MARCH 15, 18:00-20:00}
+	}
+	
+	unavalable{
+		{MARCH 14, 18:00-20:00}
+		{MARCH 13, 18:00-20:00}
+	}	
+}
+		
 ingredients{
 	bread,
 	tomato,
@@ -41,3 +47,57 @@ ingredients{
 	butter,
 	onion
 }
+	
+	
+
+function: 
+findRecipe
+
+subfunctions:
+
+ingredients:
+no key words
+
+diet:
+Vegan
+Vegetarian
+Pescatarian
+Gluten free
+Lactose free
+Low Calorie
+Low Fat
+
+Cuisine: no overlap
+Asian
+Caribbean
+Chinese
+French
+German
+Indian & Thai
+Italian
+Mediterranean
+Mexican
+
+type:
+Appetizer
+Snack
+Breakfast
+Lunch
+Dinner
+Dessert
+Drinks
+
+
+
+
+////////
+Dish Type:
+Salads
+Sandwiches
+Soups
+Breads
+Casseroles
+Pasta
+Seafood
+BBQ
+Kid Friendly
