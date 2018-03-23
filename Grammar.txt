@@ -1,0 +1,43 @@
+# Person = 	'person'(' ')*'{'Fields'}' 
+
+
+# Fields = 	'name'(' ')*'{'STRING'}'(' ')*' ',' '(' ')*' Fields | 
+			'diet'(' ')*'{'DIET'}'(' ')*' ',' '(' ')*' Nodiet | 
+			'cuisine'(' ')*'{'CUISINE'}'(' ')*' ',' '(' ')*' Fields | 
+			'type'(' ')*'{'TYPE'}'(' ')*' ',' '(' ')*' Fields |
+			'time_'('available' | 'unavailable') (' ')'*'{' Available '}' (' ')* ',' (' ')* Fields
+
+# Available = 	'{' (Date',')* Date'}'
+
+# Date = 		'{' (' ')* MONTH DAY (' ')* ',' (' ')* TIME1 (' ')* '-' (' ')* TIME2 (' ')* '}' (' ')* 
+
+
+*/
+
+event{
+	name{Bob's potluck},
+	details{Evan will be there},
+	place{MCMASTER UNIVERSITY},
+	time_unavailable{
+		{MARCH  16, 18-20},
+		{MARCH  16, 18-20}
+	}
+		
+person{
+	name{Margart},
+	diet{Vegetarian,},
+	cuisine{Italian},
+	type{Lunch},
+	
+	time_unavailable{
+		{{MARCH  16, 18-20}, {MARCH  16, 18-20}}
+	}
+}
+	
+ingredients{
+	bread,
+	tomato,
+	cheese,
+	butter,
+	onion
+}
