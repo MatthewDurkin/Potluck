@@ -1,18 +1,19 @@
+
 public class Person {
-    String name;
-    String[] diet;
-    Sring cuisine;
-    String[] type;
-    String available;
-    String unavailable;
+    private String name;
+    private String[] diet;
+    private Sring cuisine;
+    private String[] type;
+    private ArrayList available;
+    private ArrayList unavailable;
 
     public Person() {
         this.name = null;
         this.diet = new String[7];
         this.cuisine = null;
         this.type = new String[7];
-        this.available = null;
-        this.unavailable = null;
+        this.available = new ArrayList();
+        this.unavailable = new ArrayList();
     }
 
     public void setName(String name) {
@@ -45,7 +46,21 @@ public class Person {
         }
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void addAvailable(Date date) {
+        if(this.unavailable.empty) {
+            this.available.add(date);
+        }
+        else {
+            //throw exception
+        }
+    }
+
+    public void addAvailable(Date date) {
+        if(this.unavailable.empty) {
+            this.available.add(date);
+        }
+        else {
+            //throw exception
+        }
     }
 }
