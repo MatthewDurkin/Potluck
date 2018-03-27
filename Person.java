@@ -1,17 +1,17 @@
 
 public class Person {
     private String name;
-    private String[] diet;
+    private ArrayList diet;
     private Sring cuisine;
-    private String[] type;
+    private ArrayList type;
     private ArrayList available;
     private ArrayList unavailable;
 
     public Person() {
         this.name = null;
-        this.diet = new String[7];
+        this.diet = new ArrayList();
         this.cuisine = null;
-        this.type = new String[7];
+        this.type = new ArrayList();
         this.available = new ArrayList();
         this.unavailable = new ArrayList();
     }
@@ -20,10 +20,11 @@ public class Person {
         this.name = name;
     }
 
-    public void setDiet(String[] diet) {
-        if(diet.length <= 7) {
+    public void setDiet(ArrayList diet) {
+        int j = 0;
+        if((diet.length + this.diet.length) <= 7) {
             for (int i = 0; i < diet.length; i++) {
-                this.diet[i] = diet[i];
+                this.diet.add(diet.get(i));
             }
         }
         else {
@@ -35,10 +36,11 @@ public class Person {
         this.cuisine = cuisine;
     }
 
-    public void setType(String[] type) {
-        if(type.length <= 7) {
+    public void setType(ArrayList type) {
+        int j = 0;
+        if((type.length + this.type.length) <= 7) {
             for (int i = 0; i < type.length; i++) {
-                this.type[i] = type[i];
+                this.type.add(type.get(i));
             }
         }
         else {
