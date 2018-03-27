@@ -29,12 +29,12 @@ person{
 	cuisine{Italian}
 	type{Lunch}
 	
-	avalable{
+	available{
 		{MARCH 16, 18:00-20:00}
 		{MARCH 15, 18:00-20:00}
 	}
 	
-	unavalable{
+	unavailable{
 		{MARCH 14, 18:00-20:00}
 		{MARCH 13, 18:00-20:00}
 	}	
