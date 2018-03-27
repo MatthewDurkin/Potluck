@@ -1,0 +1,103 @@
+
+/*
+#GRAMMAR:
+#Program ::= Potluck EOF
+#Potluck ::= 'event' '{' Event '}' | 'person' '{' Person '}' | 'ingredients' '{' Ingredients '}'
+#Event ::= ('name'|'details'|'place') '{' STRING '}' Event | 'time' '{' Date '}' Event | NULL
+#Person ::= 'name' '{'STRING'}' Person | 
+			'diet' '{'DIET'}' Person | 
+			'cuisine' '{'CUISINE'}' Person | 
+			'type' '{'TYPE'}' Person |
+			('available' | 'unavailable') '{' Available '}' Person |
+			NULL
+#Ingredients ::= (STRING ',')* String
+#Available ::= (Date',')* Date
+#Date ::= '{' MONTH DAY ',' TIME '-' TIME '}'
+*/
+
+event{
+	name{Bob's potluck}
+	details{Evan will be there}
+	place{MCMASTER UNIVERSITi}
+	time{
+		{MARCH 16, 18:00-20:00}
+}
+
+person{
+	name{Margart}
+	diet{Vegetarian}
+	cuisine{Italian}
+	type{Lunch}
+	
+	available{
+		{MARCH 16, 18:00-20:00}
+		{MARCH 15, 18:00-20:00}
+	}
+	
+	unavailable{
+		{MARCH 14, 18:00-20:00}
+		{MARCH 13, 18:00-20:00}
+	}	
+}
+		
+ingredients{
+	bread,
+	tomato,
+	cheese,
+	butter,
+	onion
+}
+	
+	
+
+function: 
+findRecipe
+
+subfunctions:
+
+ingredients:
+no key words
+
+diet:
+Vegan
+Vegetarian
+Pescatarian
+Gluten free
+Lactose free
+Low Calorie
+Low Fat
+
+Cuisine: no overlap
+Asian
+Caribbean
+Chinese
+French
+German
+Indian & Thai
+Italian
+Mediterranean
+Mexican
+
+type:
+Appetizer
+Snack
+Breakfast
+Lunch
+Dinner
+Dessert
+Drinks
+
+
+
+
+////////
+Dish Type:
+Salads
+Sandwiches
+Soups
+Breads
+Casseroles
+Pasta
+Seafood
+BBQ
+Kid Friendly
