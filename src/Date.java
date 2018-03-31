@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 
 public class Date {
     private int month;
@@ -57,16 +58,20 @@ public class Date {
                 //throw exeption
                 break;
         }
+
         if (allday){
             this.allday = allday;
+            this.s_hour = 9;
+            this.s_min = 0;
+            this.e_hour = 22;
+            this.e_min = 0;
 
-            calendar_s.set(Calendar.HOUR_OF_DAY, 0);
-            calendar_s.set(Calendar.MINUTE, 0);
+            this.calendar_s = new GregorianCalendar(year,month,day,0,0);
 
-            calendar_e.set(Calendar.HOUR_OF_DAY, 23);
-            calendar_e.set(Calendar.MINUTE, 59);
+            this.calendar_e = new GregorianCalendar(year,month,day,21,59);
         }
         else {
+            this.allday = allday;
             if (s_hour < e_hour) {
                 this.s_hour = s_hour;
                 this.e_hour = e_hour;
@@ -81,18 +86,12 @@ public class Date {
                     this.e_min = e_min;
                 }
             }
-            calendar_s.set(Calendar.HOUR_OF_DAY, s_hour);
-            calendar_s.set(Calendar.MINUTE, s_min);
 
-            calendar_e.set(Calendar.HOUR_OF_DAY, e_hour);
-            calendar_e.set(Calendar.MINUTE, e_min);
+            this.calendar_s = new GregorianCalendar(year,month,day,s_hour,s_min);
+
+            this.calendar_e = new GregorianCalendar(year,month,day,e_hour,e_min);
 
         }
-
-        calendar_s.set(Calendar.YEAR, year);
-        calendar_s.set(Calendar.MONTH, month);
-        calendar_s.set(Calendar.DAY_OF_MONTH, day);
-
     }
 
     public int getMonth() {
