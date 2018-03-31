@@ -1,5 +1,6 @@
 //Grammar
 //Lexer rules start with Upper case letter, parser rules start with lower case letter
+//nts: saturday 31st TODO: fix military time bug, and whitespace bug. read into passing in these tokens as args to functions
 /*todo: maybe output all the availability / person / recipe info as separate .txt files, but main .csv file should
 include the basic schedule info. unsure whether to dynamically assess date / start time or hardcode
 idea is to separate two main paths, SCHEDULE(solidify the csv) AND PLAN(person + food)
