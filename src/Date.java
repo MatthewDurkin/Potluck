@@ -149,17 +149,6 @@ public class Date {
     }
 }
 
-class DateSortByDay implements Comparator <Date> {
-
-    public int compare(Date date1, Date date2) {
-        if (date1.getDay() > date2.getDay())
-            return 1;
-        else if (date1.getDay() < date2.getDay())
-            return -1;
-
-        return 0;
-    }
-}
 
 class DateSortByMonth implements Comparator <Date> {
 
@@ -172,5 +161,48 @@ class DateSortByMonth implements Comparator <Date> {
             return -1;
 
         return dsd.compare(date1, date2);
+    }
+}
+
+class DateSortByDay implements Comparator <Date> {
+
+    public int compare(Date date1, Date date2) {
+
+        DateSortByHour dsd = new DateSortByHour();
+
+        if (date1.getDay() > date2.getDay())
+            return 1;
+        else if (date1.getDay() < date2.getDay())
+            return -1;
+
+        return dsd.compare(date1, date2);
+    }
+}
+
+class DateSortByHour implements Comparator <Date> {
+
+    public int compare(Date date1, Date date2) {
+
+        DateSortByMin dsd = new DateSortByMin();
+
+        if (date1.getS_hour() > date2.getS_hour())
+            return 1;
+        else if (date1.getS_hour() < date2.getS_hour())
+            return -1;
+
+        return dsd.compare(date1, date2);
+    }
+}
+
+class DateSortByMin implements Comparator <Date> {
+
+    public int compare(Date date1, Date date2) {
+
+        if (date1.getS_min() > date2.getS_min())
+            return 1;
+        else if (date1.getS_min() < date2.getS_min())
+            return -1;
+
+        return 0;
     }
 }
