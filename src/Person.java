@@ -160,6 +160,9 @@ public class Person {
                 s = d;
             }
         }
+        else {
+            Collections.sort(this.available, new DateSortByMonth());
+        }
         return this.available;
     }
 
