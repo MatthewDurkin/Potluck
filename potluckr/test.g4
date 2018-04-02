@@ -48,9 +48,7 @@ available : AVAILABLE '{' (MONTH DAY FROM TIME TO TIME)* '}';
 unavailable : UNAVAILABLE '{' (MONTH DAY FROM TIME TO TIME)* '}';
 
 //Plan for Recipe, basic 'what's in your fridge'
-//bold comma play in the DESC here, might make things a bit challenging
-//strip away , in the backend
-//figure out how to "pass" this value up to the top
+//figure out how to "pass" this value up to the top (to "prog" rule or w/e.. do we even have to?)
 recipe returns [ArrayList<String> strTest]
 @init{
     $strTest = new ArrayList<String>();
