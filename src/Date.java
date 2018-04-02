@@ -146,6 +146,15 @@ public class Date {
         }
         return true;
     }
+
+    /*public static boolean isOverlapping(Date start1, Date end1, Date start2, Date end2) {
+        return !start1.after(end2) && !start2.after(end1);
+    }*/
+
+    public static void main(String[] args){
+        Date d = new Date(9, 20, 9, 0, 20, 30, false, 1994);
+        System.out.println(d.getCalendar_s().get(Calendar.DAY_OF_YEAR));
+    }
 }
 
 
@@ -167,7 +176,7 @@ class DateSortByDay implements Comparator <Date> {
 
     public int compare(Date date1, Date date2) {
 
-        DateSortByHour dsd = new DateSortByHour();
+        DateSortByHourStart dsd = new DateSortByHourStart();
 
         if (date1.getDay() > date2.getDay())
             return 1;
@@ -178,11 +187,11 @@ class DateSortByDay implements Comparator <Date> {
     }
 }
 
-class DateSortByHour implements Comparator <Date> {
+class DateSortByHourStart implements Comparator <Date> {
 
     public int compare(Date date1, Date date2) {
 
-        DateSortByMin dsd = new DateSortByMin();
+        DateSortByMinStart dsd = new DateSortByMinStart();
 
         if (date1.getS_hour() > date2.getS_hour())
             return 1;
@@ -193,7 +202,35 @@ class DateSortByHour implements Comparator <Date> {
     }
 }
 
-class DateSortByMin implements Comparator <Date> {
+class DateSortByMinStart implements Comparator <Date> {
+
+    public int compare(Date date1, Date date2) {
+
+        if (date1.getS_min() > date2.getS_min())
+            return 1;
+        else if (date1.getS_min() < date2.getS_min())
+            return -1;
+
+        return 0;
+    }
+}
+
+class DateSortByHourEnd implements Comparator <Date> {
+
+    public int compare(Date date1, Date date2) {
+
+        DateSortByMinEnd dsd = new DateSortByMinEnd();
+
+        if (date1.getS_hour() > date2.getS_hour())
+            return 1;
+        else if (date1.getS_hour() < date2.getS_hour())
+            return -1;
+
+        return dsd.compare(date1, date2);
+    }
+}
+
+class DateSortByMinEnd implements Comparator <Date> {
 
     public int compare(Date date1, Date date2) {
 
