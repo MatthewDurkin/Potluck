@@ -1,0 +1,43 @@
+recipe(5){
+    ingredients{"cucumber", "onion", "tomato"}
+    cuisine{Italian}
+    type{main course}
+    allergy{Dairy, Eggs}
+    diet{vegan}
+}
+
+plan {
+    attendee{
+        name{"Alice"}
+        allergy{Wheat, Dairy}
+        diet{vegetarian}
+
+        available {
+            {april 1 2018 from 15:00 to 19:00}
+            {march 15 2018 from 19:00 to 21:00}
+            {march 30 2018 from 17:00 to 22:00}
+        }
+    }
+    attendee{
+        name{"Bob"}
+        diet{vegan}
+
+        unavailable {
+            {march 30 2018 from 09:00 to 12:00}
+            {march 15 2018 from 18:00 to 20:00}
+            {march 16 2018 from 12:00 to 19:00}
+            {april 2 2018 from 15:00 to 19:00}
+        }
+    }
+    attendee{
+        name{"Nevil"}
+        allergy{Peanuts}
+
+        available {
+            {april 1 2018 from 03:00 to 19:00}
+            {march 16 2018 from 18:00 to 20:00}
+            {march 15 2018 from 19:00 to 21:00}
+            {march 30 2018 from 17:00 to 22:00}
+        }
+    }
+}
