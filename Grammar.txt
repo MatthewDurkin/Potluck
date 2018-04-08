@@ -23,7 +23,7 @@ event{
 		{MARCH 16, 18:00-20:00}
 }
 
-person{
+attendee{
 	name{Margart}
 	diet{Vegetarian}
 	cuisine{Italian}

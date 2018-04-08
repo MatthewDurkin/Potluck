@@ -9,20 +9,4 @@ available{
 	march 17 from 15:00 to 16:55
 	march 20 from 16:00 to 16:23
 	}
-
-unavailable{
-	march 18 from 19:00 to 22:44
-	april 18 from 19:00 to 22:44}
-	}
-}
-
-event{
-name{Potluck}
-date{january 26 2015}
-description{DEATHAWAITS}
-place{mcmaster}
-from{12:00 to 12:54}
-}
-plan{
-recipe{cucumber, onion}
 }

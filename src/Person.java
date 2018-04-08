@@ -5,17 +5,15 @@ import java.util.Collections;
 
 public class Person {
     private String name;
-    private ArrayList diet;
-    private String cuisine;
-    private ArrayList<String> type;
-    private ArrayList<Date> available;
-    private ArrayList<Date> unavailable;
+    private String allergy;
+    private String diet;
+    private ArrayList<PDate> available;
+    private ArrayList<PDate> unavailable;
 
     public Person() {
         this.name = null;
-        this.diet = new ArrayList();
-        this.cuisine = null;
-        this.type = new ArrayList();
+        this.allergy = null;
+        this.diet = null;
         this.available = new ArrayList();
         this.unavailable = new ArrayList();
     }
@@ -24,35 +22,28 @@ public class Person {
         this.name = name;
     }
 
-    public void setDiet(ArrayList diet) {
-        int j = 0;
-        if((diet.size() + this.diet.size()) <= 7) {
-            for (int i = 0; i < diet.size(); i++) {
-                this.diet.add(diet.get(i));
-            }
-        }
-        else {
-            System.out.println("Error: unable to set diet, array input is too long.");
-        }
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
+    public String getName() {
+        return name;
     }
 
-    public void setType(ArrayList<String> type) {
-        int j = 0;
-        if((type.size() + this.type.size()) <= 7) {
-            for (int i = 0; i < type.size(); i++) {
-                this.type.add(type.get(i));
-            }
-        }
-        else {
-            System.out.println("Error: unable to set type, array input is too long.");
-        }
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
     }
 
-    public void addAvailable(Date date) {
+    public String getDiet() {
+        return diet;
+    }
+
+    public String getAllergy() {
+        return allergy;
+    }
+
+
+    public void addAvailable(PDate date) {
         if(this.unavailable.isEmpty()) {
             this.available.add(date);
         }
@@ -61,7 +52,7 @@ public class Person {
         }
     }
 
-    public void addUnavailable(Date date) {
+    public void addUnavailable(PDate date) {
         if(this.available.isEmpty()) {
             this.unavailable.add(date);
         }
@@ -70,54 +61,65 @@ public class Person {
         }
     }
 
-    public ArrayList<Date> getAvailable() {
+    public ArrayList<PDate> getAvailable() {
+
         if(this.available.isEmpty()) {
             Collections.sort(this.unavailable, new DateSortByMonth());
-            Date s = this.unavailable.remove(0);
-            for (Date d: this.unavailable) {
+            PDate s = this.unavailable.remove(0);
+            for (PDate d: this.unavailable) {
                 //calendar day of year
                 if (s.getCalendar_s().get(Calendar.DAY_OF_YEAR) == d.getCalendar_s().get(Calendar.DAY_OF_YEAR)){
-                    this.available.add(new Date(d.getMonth(), d.getDay(), s.getE_hour(), s.getE_min(), d.getS_hour(), s.getS_min(), false, d.getYear()));
+                    if (s.getE_hour() > d.getE_hour()) {
+                        if (s.getE_hour() != 22) {
+                            this.available.add(new PDate(d.getMonth(), d.getDay(), s.getE_hour(), s.getE_min(), 22, 0, false, d.getYear()));
+                        }
+                    }
+                    else {
+                        if (s.getE_hour() != 22) {
+                            this.available.add(new PDate(d.getMonth(), d.getDay(), d.getE_hour(), d.getE_min(), 22, 22, false, d.getYear()));
+                        }
+                    }
                 }
                 else {
                     if(s.getYear() == d.getYear()) {
-                        if ((d.getCalendar_s().get(Calendar.DAY_OF_YEAR) - s.getCalendar_s().get(Calendar.DAY_OF_YEAR)) <= 1) {
+                        if ((d.getCalendar_s().get(Calendar.DAY_OF_YEAR) - s.getCalendar_s().get(Calendar.DAY_OF_YEAR)) == 1) {
                             if (s.getE_hour() < 22) {
-                                this.available.add(new Date(s.getMonth(), s.getDay(), s.getE_hour(), s.getE_min(), 22, 0, false, s.getYear()));
+                                this.available.add(new PDate(s.getMonth(), s.getDay(), s.getE_hour(), s.getE_min(), 22, 0, false, s.getYear()));
                             }
                             if (d.getS_hour() > 9) {
-                                this.available.add(new Date(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, s.getYear()));
+                                this.available.add(new PDate(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, s.getYear()));
                             }
                         }
                         else {
+                            if (s.getE_hour() != 22) {
+                                this.available.add(new PDate(s.getMonth(), s.getDay(), s.getE_hour(), s.getE_min(), 22, 0, false, d.getYear()));
+                            }
                             int dif = d.getCalendar_s().get(Calendar.DAY_OF_YEAR) - s.getCalendar_s().get(Calendar.DAY_OF_YEAR);
                             int i = s.getDay();
+                            int m = s.getCalendar_s().get(Calendar.DAY_OF_YEAR);
+                            int j = 1;
+                            Calendar cal = Calendar.getInstance();
+                            cal.set(Calendar.YEAR, s.getYear());
+                            cal.set(Calendar.DAY_OF_YEAR , s.getCalendar_s().get(Calendar.DAY_OF_YEAR));
                             if (dif > 30) {
+                                while(j < 30) {
+                                    cal.set(Calendar.DAY_OF_YEAR, m+j);
+                                    this.available.add(new PDate(cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 9, 0, 22, 0, true, cal.get(Calendar.YEAR)));
+                                    j++;
+                                }
                                 break;
                             }
-                            while (dif >= 1) {
-                                i++;
-                                if (s.getMonth() == d.getMonth()) {
+                            else {
+                                while (dif >= 1) {
+                                    i++;
+                                    cal.set(Calendar.DAY_OF_YEAR, m + j);
                                     if (dif == 1) {
-                                        this.available.add(new Date(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, d.getYear()));
+                                        this.available.add(new PDate(cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 9, 0, d.getS_hour(), d.getS_min(), false, d.getYear()));
+                                    } else {
+                                        this.available.add(new PDate(cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, s.getYear()));
                                     }
-                                    else {
-                                        this.available.add(new Date(s.getMonth(), i, 0, 0, 0, 0, true, s.getYear()));
-                                    }
-                                    dif --;
-                                }
-                                else {
-                                    if (dif == 1) {
-                                        this.available.add(new Date(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, d.getYear()));
-                                    }
-                                    else {
-                                        Calendar cal = Calendar.getInstance();
-                                        cal.set(Calendar.YEAR, s.getYear());
-                                        cal.set(Calendar.DAY_OF_YEAR, i);
-
-                                        this.available.add(new Date(s.getMonth(), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, s.getYear()));
-                                    }
-                                    dif --;
+                                    j++;
+                                    dif--;
                                 }
                             }
                         }
@@ -137,20 +139,20 @@ public class Person {
                         while (dif >= 1) {
                             i++;
                             if (dif == 1) {
-                                this.available.add(new Date(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, d.getYear()));
+                                this.available.add(new PDate(d.getMonth(), d.getDay(), 9, 0, d.getS_hour(), d.getS_min(), false, d.getYear()));
                             } else {
                                 if (i - add > 0) {
                                     Calendar cal1 = Calendar.getInstance();
                                     cal1.set(Calendar.YEAR, s.getYear());
                                     cal1.set(Calendar.DAY_OF_YEAR, i - add);
 
-                                    this.available.add(new Date(d.getMonth(), cal1.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, d.getYear()));
+                                    this.available.add(new PDate(d.getMonth(), cal1.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, d.getYear()));
                                 } else {
                                     Calendar cal2 = Calendar.getInstance();
                                     cal2.set(Calendar.YEAR, s.getYear());
                                     cal2.set(Calendar.DAY_OF_YEAR, i);
 
-                                    this.available.add(new Date(s.getMonth(), cal2.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, s.getYear()));
+                                    this.available.add(new PDate(s.getMonth(), cal2.get(Calendar.DAY_OF_MONTH), 0, 0, 0, 0, true, s.getYear()));
                                 }
                             }
                             dif--;
@@ -160,9 +162,7 @@ public class Person {
                 s = d;
             }
         }
-        else {
-            Collections.sort(this.available, new DateSortByMonth());
-        }
+        Collections.sort(this.available, new DateSortByMonth());
         return this.available;
     }
 
