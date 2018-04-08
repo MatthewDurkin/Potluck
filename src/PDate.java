@@ -156,9 +156,6 @@ public class PDate {
                 this.time_toString(s_min) + " to " + this.time_toString(e_hour) + ":" + this.time_toString(e_min));
     }
 
-    public static void main(String[] args) throws TimeException {
-        PDate d = new PDate(9, 20, 9, 0, 20, 30, false, 1994);
-    }
 }
 
 

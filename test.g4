@@ -64,7 +64,7 @@ prog locals[API myAPI = new API(),
         $csvCleanerInit.clean(csvDict);
     }
     recipeDict.put("diet", "vegetarian");
-    $myOutput.writeFile(rescipeArr, dietInt, dietStr), recipeDict, csvDict, monthStr);
+    $myOutput.writeFile(rescipeArr, recipeDict, csvDict, monthStr);
     }
     ;
 //option to set private for google csv output
