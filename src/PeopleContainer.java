@@ -48,38 +48,13 @@ public class PeopleContainer {
                 num_sets = 1;
             }
             else {
-                if(dates.get(i).overlap(A.get(A.size()-1))) {
-
-                }
-                                temp = new PDate(dates.get(i).getMonth(), dates.get(i).getDay(), dates.get(i).getS_hour(), dates.get(i).getS_min(), A.get(A.size() - 1).getE_hour(), A.get(A.size() - 1).getE_min(), false, A.get(A.size() - 1).getYear());
-                                A.add(temp);
-                                //i++;
-                                num_sets++;
-                            }
-                        }
-                        else {
-                            A.add(dates.get(i));
-                            //i++;
-                            num_sets++;
-                        }
-                        if (num_ppl == num_sets) {
-                            overlap_dates.add(A.get(A.size()-1));
-                            //i ++;
-                            if (i < dates.size()) {
-                                A.add(dates.get(i));
-                                num_sets = 1;
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                        else {
-                            A.add(dates.get(i));
-                        }
-                        //i++;
-                    }
-                    else {
-                        //i += 1;
+                if (dates.get(i).overlap(A.get(A.size() - 1))) {
+                    temp = new PDate(dates.get(i).getMonth(), dates.get(i).getDay(), dates.get(i).getS_hour(), dates.get(i).getS_min(), A.get(A.size() - 1).getE_hour(), A.get(A.size() - 1).getE_min(), false, A.get(A.size() - 1).getYear());
+                    A.add(temp);
+                    num_sets++;
+                    if (num_ppl == num_sets) {
+                        overlap_dates.add(A.get(A.size() - 1));
+                        //i ++;
                         if (i < dates.size()) {
                             A.add(dates.get(i));
                             num_sets = 1;
@@ -90,20 +65,15 @@ public class PeopleContainer {
                     }
                 }
                 else {
-                    if (i < dates.size()) {
-                        A.add(dates.get(i));
-                        num_sets = 1;
-                    }
-                    else {
-                        break;
-                    }
+                    num_sets = 1;
+                    A.add(dates.get(i));
                 }
-                i++;
             }
         }
         Collections.sort(overlap_dates, new DateSortByMonth());
         return overlap_dates;
     }
+
     public static String[][] toArray() {
         String[][] peoples = new String[PeopleList.size()][3];
         for(int i = 0; i < PeopleList.size(); i++){
