@@ -103,6 +103,33 @@ public class PDate {
 
     }
 
+    public boolean[] overlap(PDate d) {
+        boolean[] bool = new boolean[2];
+        bool[0] = false;
+        bool[1] = false;
+
+        if(this.getYear() == d.getYear()) {
+            if (this.getMonth() == d.getMonth()) {
+                if (this.getCalendar_s().get(Calendar.DAY_OF_YEAR) == d.getCalendar_s().get(Calendar.DAY_OF_YEAR)) {
+                    if (this.getS_hour() <= d.getS_hour()){
+                        if ((d.getS_hour() - this.getE_hour()) <= 0) {
+                            bool[0] = true;
+                            bool[1] = true;
+                            return true;
+                        }
+                    }
+                    else {
+                        if ((this.getS_hour() - d.getE_hour()) < 0) {
+                            return true;
+                        }
+                    }
+
+                }
+            }
+        }
+        return bool;
+    }
+
     public int getMonth() {
         return month;
     }

@@ -29,24 +29,12 @@ public class PeopleContainer {
 
     public static ArrayList<PDate> schedule() {
         ArrayList<PDate> A = new ArrayList<>();
-        Calendar rightNow = Calendar.getInstance();
-
-        PDate now = new PDate(rightNow.get(Calendar.MONTH), rightNow.get(Calendar.DAY_OF_MONTH), rightNow.get(Calendar.HOUR_OF_DAY), rightNow.get(Calendar.MINUTE), 23, 59, false, rightNow.get(Calendar.YEAR));
-
         int num_ppl = PeopleList.size();
 
         Collections.sort(dates, new DateSortByMonth());
 
         DateSortByMonth comp = new DateSortByMonth();
 
-        for (PDate d: dates) {
-            if(comp.compare(now, d) == 1 ) {
-                dates.remove(d);
-            }
-            else {
-                break;
-            }
-        }
         int i = 0;
         int num_sets = 0;
         PDate temp;
@@ -60,10 +48,9 @@ public class PeopleContainer {
                 num_sets = 1;
             }
             else {
-                if(A.get(A.size()-1).getYear() == dates.get(i).getYear()) {
-                    if(A.get(A.size()-1).getCalendar_s().get(Calendar.DAY_OF_YEAR) == dates.get(i).getCalendar_s().get(Calendar.DAY_OF_YEAR)) {
-                        if (comp_hour_end.compare(A.get(A.size()-1), dates.get(i)) == -1){
-                            if (dates.get(i).getS_hour() - A.get(A.size()-1).getE_hour() <= 0) {
+                if(dates.get(i).overlap(A.get(A.size()-1))) {
+
+                }
                                 temp = new PDate(dates.get(i).getMonth(), dates.get(i).getDay(), dates.get(i).getS_hour(), dates.get(i).getS_min(), A.get(A.size() - 1).getE_hour(), A.get(A.size() - 1).getE_min(), false, A.get(A.size() - 1).getYear());
                                 A.add(temp);
                                 //i++;
