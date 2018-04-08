@@ -29,11 +29,24 @@ public class PeopleContainer {
 
     public static ArrayList<PDate> schedule() {
         ArrayList<PDate> A = new ArrayList<>();
+        Calendar rightNow = Calendar.getInstance();
+
+        PDate now = new PDate(rightNow.get(Calendar.MONTH), rightNow.get(Calendar.DAY_OF_MONTH), rightNow.get(Calendar.HOUR_OF_DAY), rightNow.get(Calendar.MINUTE), 23, 59, false, rightNow.get(Calendar.YEAR));
 
         int num_ppl = PeopleList.size();
 
         Collections.sort(dates, new DateSortByMonth());
 
+        DateSortByMonth comp = new DateSortByMonth();
+
+        for (PDate d: dates) {
+            if(comp.compare(now, d) == 1 ) {
+                dates.remove(d);
+            }
+            else {
+                break;
+            }
+        }
         int i = 0;
         int num_sets = 0;
         PDate temp;
