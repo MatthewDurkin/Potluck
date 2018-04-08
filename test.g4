@@ -63,16 +63,8 @@ prog locals[API myAPI = new API(),
     if(csvDict.containsKey("Subject") && csvDict.containsKey("Start Date")){
         $csvCleanerInit.clean(csvDict);
     }
-<<<<<<< HEAD
-
-    recipeDict.put("diet", "vegan");
-    $myOutput.writeFile(rescipeArr, recipeDict, csvDict, monthStr);
-
-
-=======
     recipeDict.put("diet", "vegetarian");
     $myOutput.writeFile(rescipeArr, dietInt, dietStr), recipeDict, csvDict, monthStr);
->>>>>>> 8fb07eed4adfa61344c9e0ed585f39b865575bd4
     }
     ;
 //option to set private for google csv output
@@ -211,11 +203,6 @@ availability locals[String avail = ""]
     '{' pdate '}')
     ;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 8fb07eed4adfa61344c9e0ed585f39b865575bd4
 pdate locals[String mo = "", String da = "", String ye = "", String st = "", String et = "", String t =""]
    : ('{' ( m = MONTH {$mo = ($m.text.replaceAll("[^A-Za-z0-9]", ""));}
    d = DAY {$da = ($d.text.replaceAll("[^A-Za-z0-9]", ""));}
@@ -237,28 +224,6 @@ pdate locals[String mo = "", String da = "", String ye = "", String st = "", Str
    $t = "" + $st.charAt(2)+$st.charAt(3);
    date[4] = Integer.parseInt($t);
 
-<<<<<<< HEAD
-   $t = "" + $et.charAt(0)+$et.charAt(1);
-   date[5] = Integer.parseInt($t);
-   //System.out.println(date[5]);
-
-   $t = "" + $et.charAt(2)+$et.charAt(3);
-   date[6] = Integer.parseInt($t);
-   //System.out.println(date[6]);
-
-   if(available) {
-        //System.out.print("in: ");
-        //System.out.println(date[3]);
-        //System.out.print("in: ");
-        //System.out.println(date[5]);
-        PeopleContainer.getPeopleList().get(index).addAvailable(new PDate(date[0], date[1], date[3], date[4], date[5], date[6], false, date[2]));
-   }
-   else {
-        System.out.print("in: ");
-                System.out.println(date[3]);
-                System.out.print("in: ");
-        System.out.println(date[5]);
-=======
 
    $t = "" + $et.charAt(0)+$et.charAt(1);
    date[5] = Integer.parseInt($t);
@@ -272,7 +237,6 @@ pdate locals[String mo = "", String da = "", String ye = "", String st = "", Str
         PeopleContainer.getPeopleList().get(index).addAvailable(new PDate(date[0], date[1], date[3], date[4], date[5], date[6], false, date[2]));
    }
    else {
->>>>>>> 8fb07eed4adfa61344c9e0ed585f39b865575bd4
         PeopleContainer.getPeopleList().get(index).addUnavailable(new PDate(date[0], date[1], date[3], date[4], date[5], date[6], false, date[2]));
    }
    }'}' ','?)+
@@ -332,22 +296,11 @@ ATTENDEE: 'attendee';
 UNAVAILABLE : 'unavailable';
 AVAILABLE : 'available';
 INGREDIENTS : 'ingredients';
-<<<<<<< HEAD
-DAY : ([0-3][0-9] | [1-9] );
-
-//fragment NUM : [1-9];
-
-=======
 DAY : ([0-3][0-9] | [1-9]);
 //add colon in middle if you wish for "24 hour military time"
->>>>>>> 8fb07eed4adfa61344c9e0ed585f39b865575bd4
 TIME : [0-2][0-9]':'[0-5][0-9];
 YEAR : [2][0][1-9][0-9];
 //good until the year 2099
 DESC : '"' ( ~('"') )* '"' ;
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 SPACE : [ ]+;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8fb07eed4adfa61344c9e0ed585f39b865575bd4
