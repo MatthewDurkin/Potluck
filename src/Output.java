@@ -147,7 +147,9 @@ public class Output{
                 if (PeopleContainer.toArray()[i][2] != null) {
                     str += "Diet: " + PeopleContainer.toArray()[i][2] + "<br />";
                 }
-                str += "<br />";
+                if(i != size-1) {
+                    str += "<br />";
+                }
             }
             str += "</p>";
             return str;
